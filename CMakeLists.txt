@@ -54,7 +54,7 @@ endif ()
 #    include_directories(${OpenCV_INCLUDE_DIRS})
 #endif()
 
-find_package(PCL 1.7 REQUIRED)
+find_package(PCL 1.8 REQUIRED)
 
 #set(PCL_INCLUDE_DIRS /usr/include/pcl-1.8/pcl)
 
