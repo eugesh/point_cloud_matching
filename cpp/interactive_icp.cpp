@@ -158,7 +158,7 @@ main (int argc,
   viewer.setSize (1280, 1024);  // Visualiser window size
 
   // Register keyboard callback :
-  viewer.registerKeyboardCallback (&keyboardEventOccurred, (void*) NULL);
+  viewer.registerKeyboardCallback (&keyboardEventOccurred);
 
   // Display the visualiser
   while (!viewer.wasStopped ())

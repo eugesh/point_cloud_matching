@@ -1,8 +1,9 @@
+cmake_minimum_required (VERSION 3.5)
 
-cmake_minimum_required (VERSION 2.8.11)
+project (iterative_closest_point LANGUAGES CXX)
 
-project (iterative_closest_point CXX)
-
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include (FindPkgConfig)
 
 if (NOT CMAKE_BUILD_TYPE)
@@ -10,7 +11,7 @@ if (NOT CMAKE_BUILD_TYPE)
 endif ()
 
 if (${CMAKE_CXX_COMPILER_ID} STREQUAL GNU OR ${CMAKE_CXX_COMPILER_ID} STREQUAL Clang)
-  set (CXX_FLAGS "-std=c++11 -Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initializers $ENV{CXXFLAGS}")
+#  set (CXX_FLAGS "-std=c++11 -Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initializers $ENV{CXXFLAGS}")
   set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O2 ${CXX_FLAGS}")
   set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O1 ${CXX_FLAGS}")
   set (MATH_LIBRARIES m)
@@ -54,9 +55,12 @@ endif ()
 #    include_directories(${OpenCV_INCLUDE_DIRS})
 #endif()
 
-find_package(PCL 1.8 REQUIRED)
+find_package(PCL REQUIRED)
 
 #set(PCL_INCLUDE_DIRS /usr/include/pcl-1.8/pcl)
+if (UNIX)
+set(PCL_INCLUDE_DIRS /usr/include/pcl-1.10)
+endif (UNIX)
 
 include_directories(${PCL_INCLUDE_DIRS})
 link_directories(${PCL_LIBRARY_DIRS})
@@ -74,7 +78,4 @@ add_definitions(${PCL_DEFINITIONS})
 link_directories ("${CMAKE_CURRENT_SOURCE_DIR}/../bin")
 set (ADDON_LIBRARIES ${ADDON_LIBRARIES})
 
-#add_definitions (-DG_LOG_DOMAIN="ScanlineViewer")
 add_subdirectory ("cpp")
-#add_subdirectory ("tests")
-
